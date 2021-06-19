@@ -1,16 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
 
   public APIUrl: string;
+  private token: string = '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';
   serviceHeader: any;
 
   constructor(public http: Http) {
-    this.APIUrl = "https://api.github.com";
+    this.APIUrl = 'https://api.github.com';
     this.serviceHeader = new Headers({
-      'Accept': 'application/vnd.github.v3+json'
+      'Accept': 'application/vnd.github.v3+json',
+      'Authorization': 'token ' + this.token
+    });
+  }
+
+  getRepositories(user): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+        this.http.get(this.APIUrl + '/users/'+user+'/repos').pipe(map(res => res.json())).toPromise().then(data => {
+            resolve(data);
+        }).catch(err => {
+            console.error(err);
+            if (err.status == 404) {
+                if (err._body) {
+                    const _body = JSON.parse(err._body);
+                    reject('Error: ' + _body.message);
+                }
+            } else {
+                reject('Error getting repositories');
+            }
+        });
     });
   }
 
