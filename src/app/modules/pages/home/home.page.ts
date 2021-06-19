@@ -11,6 +11,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 export class HomePage {
 
+    isLoading = false;
     repos: any = [];
 
     constructor(
@@ -20,11 +21,13 @@ export class HomePage {
     ) {}
 
     ionViewDidEnter() {
+        this.isLoading = true;
         this.api.getRepositories('wjsm93').then(data => {
             this.repos = data;
-            console.log(this.repos);
+            this.isLoading = false;
         }).catch(err => {
             this.utils.presentToast(err);
+            this.isLoading = false;
         });
     }
 

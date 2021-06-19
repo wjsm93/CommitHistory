@@ -11,15 +11,52 @@
 
 <ion-content class="ion-padding">
 
-    <ion-card *ngFor="let repo of repos">
-        <ion-item>
-            <ion-icon name="logo-github" slot="start"></ion-icon>
-            <ion-label>{{repo.name}}</ion-label>
-            <ion-button fill="outline" slot="end" (click)="viewCommits(repo.id)">View commits</ion-button>
-        </ion-item>
-        <ion-card-content>
-            <a [href]="repo.html_url" target="_blank">{{repo.html_url}}</a>
-        </ion-card-content>
-    </ion-card>
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading">
+        <ion-card>
+            <ion-item>
+                <ion-icon name="logo-github" slot="start"></ion-icon>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 20%" slot="end"></ion-skeleton-text>
+            </ion-item>
+            <ion-card-content>
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-item>
+                <ion-icon name="logo-github" slot="start"></ion-icon>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 20%" slot="end"></ion-skeleton-text>
+            </ion-item>
+            <ion-card-content>
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-item>
+                <ion-icon name="logo-github" slot="start"></ion-icon>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 20%" slot="end"></ion-skeleton-text>
+            </ion-item>
+            <ion-card-content>
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+    <!-- Real data -->
+    <div *ngIf="!isLoading">
+        <ion-card *ngFor="let repo of repos">
+            <ion-item>
+                <ion-icon name="logo-github" slot="start"></ion-icon>
+                <ion-label>{{repo.name}}</ion-label>
+                <ion-button fill="outline" slot="end" (click)="viewCommits(repo.id)">View commits</ion-button>
+            </ion-item>
+            <ion-card-content>
+                <a [href]="repo.html_url" target="_blank">{{repo.html_url}}</a>
+            </ion-card-content>
+        </ion-card>
+    </div>
 
 </ion-content>
