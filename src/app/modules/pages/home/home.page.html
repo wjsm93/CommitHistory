@@ -11,6 +11,8 @@
 
 <ion-content class="ion-padding">
 
+    <p *ngIf="!isLoading && repos.length==0">No repositories found</p>
+
     <!-- Skeleton Loading -->
     <div *ngIf="isLoading">
         <ion-card>

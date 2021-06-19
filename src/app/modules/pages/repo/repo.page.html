@@ -6,16 +6,44 @@
 		<ion-title>
             {{repoName}}
 		</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="getCommits()">
+                <ion-icon name="refresh-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-    <ion-list>
+    <p *ngIf="!isLoading && commits.length==0">No commits found</p>
+
+    <ion-list *ngIf="isLoading">
         <ion-list-header>
             Commits
         </ion-list-header>
+        <ion-item>
+            <ion-icon name="git-commit-outline" slot="start"></ion-icon>
+            <ion-label>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="git-commit-outline" slot="start"></ion-icon>
+            <ion-label>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-label>
+        </ion-item>
+    </ion-list>
 
+    <ion-list *ngIf="!isLoading">
+        <ion-list-header>
+            Commits
+        </ion-list-header>
         <ion-item *ngFor="let commit of commits" tappable detail="true" (click)="viewCommit(commit.html_url)">
             <ion-icon name="git-commit-outline" slot="start"></ion-icon>
             <ion-label>
@@ -24,7 +52,6 @@
                 <p>{{commit.commit.message}}</p>
             </ion-label>
         </ion-item>
-
     </ion-list>
 
 </ion-content>

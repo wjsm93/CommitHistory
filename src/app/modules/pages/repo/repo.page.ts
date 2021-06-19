@@ -11,6 +11,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 export class RepoPage {
 
+    isLoading = false;
     repoName: string;
     commits: any = [];
 
@@ -28,11 +29,13 @@ export class RepoPage {
     }
 
     getCommits() {
+        this.isLoading = true;
         this.api.getCommits(this.repoName).then(data => {
             this.commits = data;
-            console.log(data);
+            this.isLoading = false;
         }).catch(err => {
             this.utils.presentToast(err);
+            this.isLoading = false;
         })
     }
 
