@@ -22,7 +22,7 @@ export class HomePage {
 
     ionViewDidEnter() {
         this.isLoading = true;
-        this.api.getRepositories('wjsm93').then(data => {
+        this.api.getRepositories().then(data => {
             this.repos = data;
             this.isLoading = false;
         }).catch(err => {

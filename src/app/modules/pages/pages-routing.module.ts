@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePage } from './home/home.page';
+import { RepoPage } from './repo/repo.page';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomePage
+  },
+  {
+    path: 'repo/:name',
+    component: RepoPage
   }
 ];
 

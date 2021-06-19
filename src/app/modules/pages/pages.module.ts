@@ -7,6 +7,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { HttpModule } from '@angular/http';
 import { ApiService } from 'src/app/services/api.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { RepoPage } from './repo/repo.page';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { UtilsService } from 'src/app/services/utils.service';
     HttpModule
   ],
   declarations: [
-      HomePage
+      HomePage,
+      RepoPage
   ],
   providers: [
       ApiService,
