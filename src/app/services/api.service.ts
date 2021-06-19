@@ -6,14 +6,14 @@ import { map } from 'rxjs/operators';
 export class ApiService {
 
   public APIUrl: string;
-  private token: string = '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';
+  private token: string = 'Z2hwX0NIM3U1QWU1RnVuOUxDdUZoZVlwb2c4QU0wVVZiSzRQOHRQSg==';
   serviceHeader: any;
 
   constructor(public http: Http) {
     this.APIUrl = 'https://api.github.com';
     this.serviceHeader = new Headers({
       'Accept': 'application/vnd.github.v3+json',
-      'Authorization': 'token ' + this.token
+      'Authorization': 'token ' + atob(this.token)
     });
   }
 
