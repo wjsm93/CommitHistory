@@ -5,7 +5,8 @@ import { HomePage } from './home/home.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home'
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: 'home',
