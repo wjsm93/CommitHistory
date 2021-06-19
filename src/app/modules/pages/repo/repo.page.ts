@@ -11,7 +11,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 export class RepoPage {
 
-    repoName: any;
+    repoName: string;
+    commits: any = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -22,17 +23,21 @@ export class RepoPage {
     ionViewDidEnter() {
         this.route.params.subscribe(data => {
             this.repoName = data.name;
-            console.log("name", this.repoName);
             this.getCommits();
         });
     }
 
     getCommits() {
         this.api.getCommits(this.repoName).then(data => {
+            this.commits = data;
             console.log(data);
         }).catch(err => {
             this.utils.presentToast(err);
         })
+    }
+
+    viewCommit(url) {
+        window.open(url, "_blank");
     }
 
 }

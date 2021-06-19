@@ -4,10 +4,27 @@
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-title>
-            
+            {{repoName}}
 		</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+
+    <ion-list>
+        <ion-list-header>
+            Commits
+        </ion-list-header>
+
+        <ion-item *ngFor="let commit of commits" tappable detail="true" (click)="viewCommit(commit.html_url)">
+            <ion-icon name="git-commit-outline" slot="start"></ion-icon>
+            <ion-label>
+                <h2>By: {{commit.commit.author.name}}</h2>
+                <h3>{{commit.commit.author.date | date:'medium'}}</h3>
+                <p>{{commit.commit.message}}</p>
+            </ion-label>
+        </ion-item>
+
+    </ion-list>
+
 </ion-content>
